@@ -1,9 +1,11 @@
 import { Button } from '@tremor/react';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function Hero() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <div className="text-center py-12 px-4 sm:px-6 lg:px-8">
@@ -26,7 +28,7 @@ export default function Hero() {
             <Button
               className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
               icon={ArrowRightIcon}
-              onClick={() => signIn('salesforce')}
+              onClick={() => router.push('/connect')}
             >
               Connect to Salesforce
             </Button>
