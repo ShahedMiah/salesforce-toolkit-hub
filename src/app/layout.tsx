@@ -1,24 +1,25 @@
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { Providers } from '@/components/Providers';
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { Providers } from '@/components/providers'
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Salesforce Toolkit Hub',
-  description: 'A collection of tools for Salesforce configuration and development',
-};
+  description: 'Modern tools for Salesforce development and administration',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full bg-gray-50">
-      <body className={`h-full ${inter.className}`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
     </html>
-  );
+  )
 }
