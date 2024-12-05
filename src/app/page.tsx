@@ -1,6 +1,7 @@
 import ToolGrid from '@/components/ToolGrid';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
+import { Title, Text } from '@tremor/react';
 
 export default function Home() {
   return (
@@ -9,11 +10,11 @@ export default function Home() {
       <Hero />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-gray-900">Available Tools</h2>
-          <p className="text-gray-500 max-w-3xl">
+          <Title>Available Tools</Title>
+          <Text>
             Select a tool to get started with your Salesforce configuration. Each tool is designed 
             to make your admin work easier and more efficient.
-          </p>
+          </Text>
           <ToolGrid />
         </div>
       </main>
