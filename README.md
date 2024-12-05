@@ -7,7 +7,7 @@ A modern web application built with Next.js that provides a collection of tools 
 - 🛠️ **Field Manager**: Manage custom fields across multiple objects
 - 🔑 **Permission Sets**: Create and manage permission sets with ease
 - 📊 **Object Manager**: Configure custom objects and their relationships
-- 🔐 **Secure Authentication**: OAuth 2.0 integration with Salesforce
+- 🔐 **Multi-Environment Support**: Connect to multiple Salesforce orgs
 - 💻 **Modern UI**: Built with Tremor and Tailwind CSS
 
 ## Getting Started
@@ -16,9 +16,8 @@ A modern web application built with Next.js that provides a collection of tools 
 
 - Node.js 18.x or later
 - npm or yarn
-- A Salesforce org with API access
 
-### Installation
+### Running the App
 
 1. Clone the repository:
 ```bash
@@ -31,19 +30,24 @@ cd salesforce-toolkit-hub
 npm install
 ```
 
-3. Create a `.env.local` file in the root directory and add your Salesforce credentials:
+3. Run the development server:
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### Setting up Salesforce Connection (Optional)
+
+To connect to Salesforce orgs, you'll need to:
+
+1. Create a Connected App in your Salesforce org
+2. Create a `.env.local` file in the root directory with your Connected App credentials:
 ```env
 SFDC_CLIENT_ID=your_client_id
 SFDC_CLIENT_SECRET=your_client_secret
 NEXTAUTH_URL=http://localhost:3000
 ```
-
-4. Run the development server:
-```bash
-npm run dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Tech Stack
 
@@ -61,6 +65,7 @@ npm run dev
 src/
 ├── app/                # Next.js app directory
 ├── components/         # Reusable UI components
+├── context/            # React Context providers
 ├── lib/               # Utility functions and configurations
 └── types/             # TypeScript type definitions
 ```
