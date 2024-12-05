@@ -1,5 +1,5 @@
-import { Card } from '@tremor/react';
 import { WrenchScrewdriverIcon, DocumentTextIcon, TableCellsIcon } from '@heroicons/react/24/outline';
+import ToolCard from './ToolCard';
 
 const tools = [
   {
@@ -25,20 +25,9 @@ const tools = [
 export default function ToolGrid() {
   return (
     <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {tools.map((tool) => {
-        const Icon = tool.icon;
-        return (
-          <Card
-            key={tool.name}
-            className="hover:shadow-lg transition-shadow cursor-pointer"
-            onClick={() => window.location.href = tool.href}
-          >
-            <Icon className="h-8 w-8 text-blue-600" />
-            <h2 className="mt-4 text-xl font-semibold">{tool.name}</h2>
-            <p className="mt-2 text-gray-600">{tool.description}</p>
-          </Card>
-        );
-      })}
+      {tools.map((tool) => (
+        <ToolCard key={tool.name} {...tool} />
+      ))}
     </div>
   );
 }
