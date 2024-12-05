@@ -12,7 +12,8 @@ export default function ConnectButton() {
   if (session) {
     return (
       <Button
-        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-10"
+        size="lg"
+        className="bg-red-600 hover:bg-red-700 text-white px-8 py-3"
         onClick={() => signOut()}
       >
         Disconnect from Salesforce
@@ -22,10 +23,11 @@ export default function ConnectButton() {
 
   return (
     <Button
-      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
+      size="lg"
+      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
       onClick={() => router.push('/connect')}
     >
-      Connect to Salesforce
+      <span>Connect to Salesforce</span>
       <ArrowRightIcon className="ml-2 h-5 w-5" />
     </Button>
   );
