@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@tremor/react';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { signOut, useSession } from 'next-auth/react';
