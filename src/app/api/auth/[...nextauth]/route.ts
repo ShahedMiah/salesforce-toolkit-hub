@@ -1,5 +1,4 @@
 import NextAuth from 'next-auth';
-import { SalesforceConfig } from '@/lib/config';
 
 const handler = NextAuth({
   providers: [
@@ -7,13 +6,35 @@ const handler = NextAuth({
       id: 'salesforce',
       name: 'Salesforce',
       type: 'oauth',
-      clientId: SalesforceConfig.clientId,
-      clientSecret: SalesforceConfig.clientSecret,
-      wellKnown: 'https://login.salesforce.com/.well-known/openid-configuration',
+      clientId: '',  // Will be set dynamically
+      clientSecret: '', // Will be set dynamically
       authorization: {
+        url: '',  // Will be set based on environment
         params: {
-          scope: 'api refresh_token'
+          scope: 'api refresh_token',
+          response_type: 'code'
         }
+      },
+      token: {
+        url: '',  // Will be set based on environment
+        params: { grant_type: 'authorization_code' }
+      },
+      userinfo: {
+        url: '',  // Will be set based on environment
+        params: { format: 'json' }
+      },
+      async configuration() {
+        // Get config from session storage during the flow
+        const config = JSON.parse(sessionStorage.getItem('sfConfig') || '{}');
+        const { instanceUrl, clientId, clientSecret } = config;
+
+        return {
+          clientId,
+          clientSecret,
+          authorization: `${instanceUrl}/services/oauth2/authorize`,
+          token: `${instanceUrl}/services/oauth2/token`,
+          userinfo: `${instanceUrl}/services/oauth2/userinfo`
+        };
       },
       profile(profile) {
         return {
@@ -26,7 +47,6 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, account }) {
-      // Save the Salesforce access token and instance URL when we get them
       if (account) {
         token.accessToken = account.access_token;
         token.instanceUrl = account.instance_url;
@@ -34,7 +54,6 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      // Make the Salesforce access token and instance URL available to the client
       session.accessToken = token.accessToken;
       session.instanceUrl = token.instanceUrl;
       return session;
