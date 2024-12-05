@@ -1,25 +1,24 @@
 'use client';
 
 import { WrenchScrewdriverIcon, DocumentTextIcon, TableCellsIcon } from '@heroicons/react/24/outline';
-import { Card, Title, Text } from '@tremor/react';
 import { useRouter } from 'next/navigation';
 
 const tools = [
   {
     name: 'Field Manager',
-    description: 'Manage custom fields across multiple objects with ease. Create, update, and delete fields in bulk.',
+    description: 'Manage custom fields across multiple objects with ease.',
     icon: WrenchScrewdriverIcon,
     href: '/tools/field-manager'
   },
   {
     name: 'Permission Sets',
-    description: 'Simplify permission set management. Create, clone, and modify permission sets with a user-friendly interface.',
+    description: 'Simplify permission set management and assignments.',
     icon: DocumentTextIcon,
     href: '/tools/permission-sets'
   },
   {
     name: 'Object Manager',
-    description: 'Configure custom objects and their relationships. Manage fields, page layouts, and validation rules.',
+    description: 'Configure custom objects and their relationships.',
     icon: TableCellsIcon,
     href: '/tools/object-manager'
   }
@@ -33,21 +32,19 @@ export default function ToolGrid() {
       {tools.map((tool) => {
         const Icon = tool.icon;
         return (
-          <Card 
+          <div 
             key={tool.name}
-            decoration="top"
-            decorationColor="blue"
             onClick={() => router.push(tool.href)}
-            className="cursor-pointer ring-0 p-6"
+            className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
           >
             <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0 bg-blue-100 rounded-tremor-full p-3">
+              <div className="p-2 bg-blue-100 rounded-lg">
                 <Icon className="h-6 w-6 text-blue-600" />
               </div>
-              <Title>{tool.name}</Title>
+              <h3 className="text-lg font-semibold text-gray-900">{tool.name}</h3>
             </div>
-            <Text className="mt-4">{tool.description}</Text>
-          </Card>
+            <p className="mt-4 text-sm text-gray-500">{tool.description}</p>
+          </div>
         );
       })}
     </div>
