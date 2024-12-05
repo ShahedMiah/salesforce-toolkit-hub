@@ -1,7 +1,7 @@
 'use client';
 
 import { WrenchScrewdriverIcon, DocumentTextIcon, TableCellsIcon } from '@heroicons/react/24/outline';
-import { Card } from '@tremor/react';
+import { Card, Title, Text } from '@tremor/react';
 import { useRouter } from 'next/navigation';
 
 const tools = [
@@ -29,26 +29,24 @@ export default function ToolGrid() {
   const router = useRouter();
   
   return (
-    <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {tools.map((tool) => {
         const Icon = tool.icon;
         return (
-          <Card
+          <Card 
             key={tool.name}
-            className="p-6 hover:shadow-lg transition-shadow cursor-pointer"
+            decoration="top"
+            decorationColor="blue"
             onClick={() => router.push(tool.href)}
+            className="cursor-pointer ring-0 p-6"
           >
             <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0 bg-blue-100 rounded-lg p-3">
+              <div className="flex-shrink-0 bg-blue-100 rounded-tremor-full p-3">
                 <Icon className="h-6 w-6 text-blue-600" />
               </div>
-              <div>
-                <h3 className="text-lg font-medium text-gray-900">{tool.name}</h3>
-              </div>
+              <Title>{tool.name}</Title>
             </div>
-            <p className="mt-4 text-sm text-gray-500 leading-relaxed">
-              {tool.description}
-            </p>
+            <Text className="mt-4">{tool.description}</Text>
           </Card>
         );
       })}
