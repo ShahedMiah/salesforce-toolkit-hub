@@ -12,11 +12,9 @@ const handler = NextAuth({
       wellKnown: 'https://login.salesforce.com/.well-known/openid-configuration',
       authorization: {
         params: {
-          scope: 'openid api refresh_token',
-        },
+          scope: 'api refresh_token'
+        }
       },
-      token: 'https://login.salesforce.com/services/oauth2/token',
-      userinfo: 'https://login.salesforce.com/services/oauth2/userinfo',
       profile(profile) {
         return {
           id: profile.sub,
@@ -28,16 +26,16 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, account }) {
+      // Save the Salesforce access token and instance URL when we get them
       if (account) {
         token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
         token.instanceUrl = account.instance_url;
       }
       return token;
     },
     async session({ session, token }) {
+      // Make the Salesforce access token and instance URL available to the client
       session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
       session.instanceUrl = token.instanceUrl;
       return session;
     },
